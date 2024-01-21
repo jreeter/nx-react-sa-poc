@@ -1,4 +1,4 @@
-import logo from '../assets/visio-logo.png';
+import logo from '../../assets/visio-logo.png';
 import {
   Home,
   AttachMoney,
@@ -10,7 +10,7 @@ import {
 } from '@mui/icons-material';
 
 import { Badge, Box, IconButton, Link } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 const Logo = () => {
@@ -34,6 +34,7 @@ const Logo = () => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const NavItem = (props: any) => {
   return (
     <div style={{ padding: '10px', marginLeft: '10px' }}>{props.children}</div>
@@ -86,7 +87,13 @@ const TopNav = () => {
 };
 
 const UserNav = () => {
-  const [read, setRead] = useState(2);
+  const [read, setRead] = useState(0);
+
+  useEffect(() => {
+    //mock data
+    setRead(13);
+  }, []);
+
   return (
     <Box
       style={{

@@ -1,14 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.scss';
-
-import NxWelcome from './nx-welcome';
+import MainLayout from './layouts/main-layout';
 
 export function App() {
-  return (
-    <div>
-      <NxWelcome title="crvo-ui" />
-    </div>
-  );
+  // Add any context providers here, MainLayot should be center-most.
+  return <MainLayout />;
 }
 
 export default App;

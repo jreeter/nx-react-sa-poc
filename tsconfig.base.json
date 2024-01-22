@@ -15,8 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@crvo-ui/assets": ["modules/assets/src/index.ts"],
-      "@crvo-ui/deals": ["modules/deals/src/index.ts"]
+      "@crvo-ui/assets": ["src/modules/assets/src/index.ts"],
+      "@crvo-ui/deals": ["src/modules/deals/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

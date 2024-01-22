@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -72,15 +72,12 @@ export function Deals(props: DealsProps) {
     <Box
       style={{
         width: '100%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
         backgroundColor: 'white',
         padding: '25px',
         borderRadius: '25px',
       }}
     >
+      <Typography style={{ width: '100%' }}>You 9 loans!</Typography>
       <DealsTable />
     </Box>
   );

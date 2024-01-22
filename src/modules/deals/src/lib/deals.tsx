@@ -1,4 +1,4 @@
-import { Box, Button, Link, Typography } from '@mui/material';
+import { Box, Button, Chip, Link, Typography } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -71,7 +71,9 @@ const DealsTable = (props: DealsTableProps) => {
               <TableCell align="right">{row.loanAmount}</TableCell>
               <TableCell align="right">{row.openDate}</TableCell>
               <TableCell align="right">{row.closedDate}</TableCell>
-              <TableCell align="right">{row.status}</TableCell>
+              <TableCell align="right">
+                <Chip color="success" label={row.status}></Chip>
+              </TableCell>
               <TableCell align="right">
                 <Button>Do Task</Button>
               </TableCell>

@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Link, Typography } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,29 +6,31 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useEffect, useState } from 'react';
+import { dealsData } from './deals-data';
 
-/* eslint-disable-next-line */
-export interface DealsProps {}
+type Address = {
+  street: string;
+  city: string;
+  state: string;
+  zipcode: string;
+};
 
-const DealsTable = () => {
-  function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number
-  ) {
-    return { name, calories, fat, carbs, protein };
-  }
+type DealRow = {
+  dealId: string;
+  address: Address;
+  type: string;
+  propertyValue: number;
+  loanAmount: number;
+  openDate: string;
+  closedDate: string;
+  status: string;
+};
 
-  const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-  ];
-
+interface DealsTableProps {
+  deals: DealRow[];
+}
+const DealsTable = (props: DealsTableProps) => {
   return (
     <TableContainer component={Paper}>
       <Table
@@ -39,26 +41,40 @@ const DealsTable = () => {
       >
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>Address</TableCell>
+            <TableCell align="right">Loan Type</TableCell>
+            <TableCell align="right">Property Value</TableCell>
+            <TableCell align="right">Loan Amount</TableCell>
+            <TableCell align="right">Open Date</TableCell>
+            <TableCell align="right">Close Date</TableCell>
+            <TableCell align="right">Status</TableCell>
+            <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {props.deals.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.address.street}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                <Link>
+                  <Typography>{row.address.street}</Typography>
+                  <Typography>
+                    {row.address.city}, {row.address.state},{' '}
+                    {row.address.zipcode}
+                  </Typography>
+                </Link>
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.type}</TableCell>
+              <TableCell align="right">{row.propertyValue}</TableCell>
+              <TableCell align="right">{row.loanAmount}</TableCell>
+              <TableCell align="right">{row.openDate}</TableCell>
+              <TableCell align="right">{row.closedDate}</TableCell>
+              <TableCell align="right">{row.status}</TableCell>
+              <TableCell align="right">
+                <Button>Do Task</Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -67,7 +83,17 @@ const DealsTable = () => {
   );
 };
 
+/* eslint-disable-next-line */
+export interface DealsProps {}
+
 export function Deals(props: DealsProps) {
+  const [deals, setDeals] = useState<DealRow[]>([]);
+
+  useEffect(() => {
+    // "load mock data from shepherd"
+    setDeals(dealsData);
+  }, []);
+
   return (
     <Box
       style={{
@@ -77,8 +103,10 @@ export function Deals(props: DealsProps) {
         borderRadius: '25px',
       }}
     >
-      <Typography style={{ width: '100%' }}>You 9 loans!</Typography>
-      <DealsTable />
+      <Typography style={{ width: '100%' }}>
+        You have {deals.length} loans!
+      </Typography>
+      <DealsTable deals={deals} />
     </Box>
   );
 }

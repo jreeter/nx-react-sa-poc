@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useEffect, useState } from 'react';
 import { dealsData } from './deals-data';
+import { Link as RouterLink } from 'react-router-dom';
 
 type Address = {
   street: string;
@@ -58,7 +59,7 @@ const DealsTable = (props: DealsTableProps) => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <Link>
+                <Link component={RouterLink} to={`/deals/${row.dealId}`}>
                   <Typography>{row.address.street}</Typography>
                   <Typography>
                     {row.address.city}, {row.address.state},{' '}
